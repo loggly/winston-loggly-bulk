@@ -28,8 +28,7 @@
   ],
   "dependencies": {
     "clone": "2.1.2",
-    "node-loggly-bulk": "2.2.4",
-    "winston-transport": "4.2.0"
+    "node-loggly-bulk": "2.2.4"
   },
   "devDependencies": {
     "vows": "0.8.2",
