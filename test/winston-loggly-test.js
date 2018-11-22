@@ -6,22 +6,20 @@
  *
  */
 
-var path = require('path'),
-    vows = require('vows'),
-    assert = require('assert'),
-    winston = require('winston'),
-    helpers = require('winston/test/helpers'),
-    Loggly = require('../lib/winston-loggly').Loggly;
+var vows = require('vows'),
+  assert = require('assert'),
+  helpers = require('./helpers.js'),
+  Loggly = require('../lib/winston-loggly').Loggly;
 
 var tokenTransport,
-    config;
+  config;
 
 try {
   config = require('./config');
 }
 catch (ex) {
-  console.log('Error reading test/config.json.')
-  console.log('Are you sure it exists?\n');
+  console.error('Error reading test/config.json.');
+  console.error('Are you sure it exists?\n');
   console.dir(ex);
   process.exit(1);
 }
@@ -31,18 +29,24 @@ tokenTransport = new (Loggly)({
   token: config.transports.loggly.token
 });
 
+tokenTransport.log('warning', 'test message', {}, (_err, _res) => {
+});
+
 function assertLoggly(transport) {
   assert.instanceOf(transport, Loggly);
   assert.isFunction(transport.log);
 }
 
 vows.describe('winston-loggly').addBatch({
-  "An instance of the Loggly Transport": {
-    "when passed an input token": {
-      "should have the proper methods defined": function () {
+  'An instance of the Loggly Transport': {
+    'when passed an input token': {
+      'should have the proper methods defined': function () {
         assertLoggly(tokenTransport);
       },
-      "the log() method": helpers.testNpmLevels(tokenTransport, "should log messages to loggly", function (ign, err, logged) {
+      'the log() method': helpers.testLevels(tokenTransport, 'should log messages to loggly', function (
+        ign,
+        err,
+        logged) {
         assert.isNull(err);
         assert.isTrue(logged);
       })

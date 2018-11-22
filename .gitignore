@@ -1,4 +1,7 @@
+.idea/
+.DS_Store
+
 test/config.json
+
 node_modules
 npm-debug.log
-.DS_Store
