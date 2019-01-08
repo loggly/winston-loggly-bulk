@@ -99,7 +99,7 @@ If you are running npm version 2 or lower then run the below command to setup th
 ``` bash
   $ npm install winston-loggly-bulk winston
 ```
-* __Note:__ To check the currrent npm version run the below command-
+* __Note:__ To check the current npm version run the below command-
 
 ``` bash
   $ npm -v
