@@ -1,6 +1,6 @@
 {
   "name": "winston-loggly-bulk",
-  "version": "3.0.0-rc1",
+  "version": "3.0.0",
   "description": "A Loggly transport for winston",
   "author": "Loggly <opensource@loggly.com>",
   "contributors": [
