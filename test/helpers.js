@@ -1,79 +1,48 @@
-const winston = require('winston');
-module.exports.testLevels = function (transport, assertMsg, assertFn) {
+const winston = require("winston");
+module.exports.testLevels = function(transport, assertMsg, assertFn) {
   var tests = {};
   const levels = winston.config.npm.levels;
 
-  Object.keys(levels).forEach(function (level) {
+  Object.keys(levels).forEach(function(level) {
     var test = {
-      topic: function () {
-        transport.log(level, 'test message', {}, this.callback.bind(this, null));
+      topic: function() {
+        transport.log({ level, message: "test message" }, this.callback);
       }
     };
 
     test[assertMsg] = assertFn;
-    tests['with the ' + level + ' level'] = test;
+    tests["with the " + level + " level"] = test;
   });
 
   var metadatatest = {
-    topic: function () {
-      transport.log('info', 'test message', { metadata: true }, this.callback.bind(this, null));
+    topic: function() {
+      transport.log(
+        { level: "info", message: "test message meta boolean", Metadata: true },
+        this.callback
+      );
     }
   };
 
   metadatatest[assertMsg] = assertFn;
-  tests['when passed metadata'] = metadatatest;
+  tests["when passed metadata"] = metadatatest;
 
   var primmetadatatest = {
-    topic: function () {
-      transport.log('info', 'test message', 'metadata', this.callback.bind(this, null));
+    topic: function() {
+      transport.log("metadata", this.callback);
     }
   };
 
   primmetadatatest[assertMsg] = assertFn;
-  tests['when passed primitive metadata'] = primmetadatatest;
+  tests["when passed primitive metadata"] = primmetadatatest;
 
   var nummetadatatest = {
-    topic: function () {
-      transport.log('info', 'test message', 123456789, this.callback.bind(this, null));
+    topic: function() {
+      transport.log(123456789, this.callback);
     }
   };
 
   nummetadatatest[assertMsg] = assertFn;
-  tests['when passed numeric metadata'] = nummetadatatest;
-
-// circular references aren't supportded by regular JSON, and it's not supported
-// by node-loggly-bulk. I'm omitting it for now. If it wants to be fixed, then
-// node-loggly-bulk needs an update.
-/*
-  var circmetadata = { };
-  circmetadata['metadata'] = circmetadata;
-
-  var circmetadatatest = {
-    topic: function () {
-      transport.log('info', 'circular message', circmetadata, this.callback.bind(this, null));
-    }
-  };
-
-  circmetadatatest[assertMsg] = assertFn;
-  tests['when passed circular metadata'] = circmetadatatest;
-
-  var circerror = new Error("message!");
-  var foo = {};
-  var circerrordatatest;
-
-  foo.bar = foo;
-  circerror.foo = foo;
-  circerror.stack = 'Some stacktrace';
-
-  circerrordatatest = {
-    topic: function () {
-      transport.log('info', 'circular error', circerror, this.callback.bind(this, null));
-    }
-  };
-
-  circerrordatatest[assertMsg] = assertFn;
-  tests['when passed circular error as metadata'] = circerrordatatest;
-*/
+  tests["when passed numeric metadata"] = nummetadatatest;
 
   return tests;
 };

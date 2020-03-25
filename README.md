@@ -8,11 +8,8 @@ A [Loggly][0] transport for [winston][1].
 
 A client implementation for Loggly in node.js. Check out Loggly's [Node logging documentation](https://www.loggly.com/docs/nodejs-logs/) for more.
 
-## Looking for `winston-loggly-bulk@3.x` documentation?
-
-Please note that the documentation below is for `winston-loggly-bulk@2.x`. [Read the winston-loggly-bulk@3.x documentation](https://github.com/loggly/winston-loggly-bulk/tree/3.x).
-
 ## Usage
+
 ``` js
   var winston = require('winston');
 
@@ -25,13 +22,11 @@ Please note that the documentation below is for `winston-loggly-bulk@2.x`. [Read
   winston.add(new Loggly({options}));
 ```
 
-The Loggly transport is based on [Nodejitsu's][2] [node-loggly][3] implementation of the [Loggly][0] API. If you haven't heard of Loggly before, you should probably read their [value proposition][4]. The Loggly transport takes the following options. Either 'inputToken' or 'inputName' is required:
+The Loggly transport is based on [Nodejitsu's][2] [node-loggly][3] implementation of the [Loggly][0] API. If you haven't heard of Loggly before, you should probably read their [value proposition][4]. The Loggly transport takes the following options.
 
-* __level:__ Level of messages that this transport should log.
 * __subdomain:__ The subdomain of your Loggly account. *[required]*
-* __auth__: The authentication information for your Loggly account. *[required with inputName]*
-* __inputName:__ The name of the input this instance should log to.
-* __inputToken:__ The input token of the input this instance should log to.
+* __token:__ The access token (previously inputToken) *[required]*
+* __auth__: The authentication information for your Loggly account.
 * __json:__ If true, messages will be sent to Loggly as JSON.
 * __tags:__ An array of tags to send to loggly.
 * __isBulk:__ If true, sends messages using bulk url
@@ -43,13 +38,11 @@ The Loggly transport is based on [Nodejitsu's][2] [node-loggly][3] implementatio
   - __Note:__ Library includes timestamp by default when we do not set timestamp option.
 * __networkErrorsOnConsole:__ The library keep track of different network errors and can log them to console. By default, logging errors on console is disabled and can be enabled easily by setting this parameter's value to `true`. If true, all the network errors will be logged to console.
 
-*Metadata:* Logged in suggested [Loggly format][5]
-
 ## Sample Working Code Snippet
 
 ``` js
 var winston  = require('winston');
-var {Loggly} = require('winston-loggly-bulk');
+var { Loggly } = require('winston-loggly-bulk');
 
 winston.add(new Loggly({
     token: "TOKEN",
@@ -66,12 +59,14 @@ winston.log('info', "Hello World from Node.js!");
 This library has buffer support during temporary network outage. User can configure size of buffer (no. of logs to be stored during network outage).
 
 Add these below configuration in code snippet to override the default values of buffer option  __size__ and __retriesInMilliSeconds__.
+
 ``` js
 bufferOptions: {
-    size: 1000,
-    retriesInMilliSeconds: 60 * 1000
+  size: 1000,
+  retriesInMilliSeconds: 60 * 1000
 }  
 ```
+
 * __Note:__ The default value of buffer size and retries in milliseconds are 500 and 30000 (30 seconds) respectively.
 
 ## Flush logs and exit
@@ -82,54 +77,40 @@ Here is an example of how to use the method:
 
 ``` js
 var winston = require('winston');
-var {flushLogsAndExit} = require('winston-loggly-bulk');
+var { flushLogsAndExit } = require('winston-loggly-bulk');
 
 winston.log("info", "Hello World from Node.js!");
 flushLogsAndExit();
-  
 ```
 
 ## Motivation
+
 `tldr;?`: To break the [winston][1] codebase into small modules that work together.
 
 The [winston][1] codebase has been growing significantly with contributions and other logging transports. This is **awesome**. However, taking a ton of additional dependencies just to do something simple like logging to the Console and a File is overkill.
 
 ## Installation
 
-### Installing npm (node package manager)
-
 ``` bash
-  $ curl http://npmjs.org/install.sh | sh
+  npm install winston-loggly-bulk
 ```
 
-### Installing winston-loggly-bulk
-
-If you are running npm version 3 or higher then run the below command to setup the logging-
+Note: If you are using npm version 2, please run the below command:
 
 ``` bash
-  $ npm install winston-loggly-bulk
-```
-
-If you are running npm version 2 or lower then run the below command to setup the logging-
-
-``` bash
-  $ npm install winston-loggly-bulk winston
-```
-* __Note:__ To check the currrent npm version run the below command-
-
-``` bash
-  $ npm -v
+  npm install winston-loggly-bulk winston
 ```
 
 ## Run Tests
-All of the winston tests are written in [vows][6], and cover all of the use cases described above. You will need to add valid credentials for the various transports included to test/config.json before running tests:
+
+All of the winston tests are written in [vows][5], and cover all of the use cases described above. You will need to add valid credentials for the various transports included to `test/config.json` before running tests:
 
 ``` js
   {
     "transports": {
       "loggly": {
         "subdomain": "your-subdomain",
-        "inputToken": "really-long-token-you-got-from-loggly",
+        "token": "really-long-token-you-got-from-loggly",
         "auth": {
           "username": "your-username",
           "password": "your-password"
@@ -139,20 +120,20 @@ All of the winston tests are written in [vows][6], and cover all of the use case
   }
 ```
 
-Once you have valid configuration and credentials you can run tests with [npm][7]:
+Once you have valid configuration and credentials you can run tests with [npm][6]:
 
-```
+``` bash
   npm test
 ```
 
 #### Author: [Charlie Robbins](http://www.github.com/indexzero)
+
 #### Contributors: [Loggly](http://github.com/loggly), [Shweta Jain](http://github.com/shwetajain148),
 
 [0]: http://loggly.com
-[1]: https://github.com/flatiron/winston
+[1]: https://github.com/winstonjs/winston
 [2]: http://nodejitsu.com
 [3]: https://github.com/nodejitsu/node-loggly
 [4]: http://www.loggly.com/product/
-[5]: http://www.loggly.com/docs/automated-parsing/
-[6]: http://vowsjs.org
-[7]: http://npmjs.org
+[5]: http://vowsjs.org
+[6]: http://npmjs.org
