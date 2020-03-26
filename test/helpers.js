@@ -1,4 +1,4 @@
-const winston = require("winston");
+const winston = require('winston');
 module.exports.testLevels = function(transport, assertMsg, assertFn) {
   var tests = {};
   const levels = winston.config.npm.levels;
@@ -6,34 +6,34 @@ module.exports.testLevels = function(transport, assertMsg, assertFn) {
   Object.keys(levels).forEach(function(level) {
     var test = {
       topic: function() {
-        transport.log({ level, message: "test message" }, this.callback);
+        transport.log({ level, message: 'test message' }, this.callback);
       }
     };
 
     test[assertMsg] = assertFn;
-    tests["with the " + level + " level"] = test;
+    tests['with the ' + level + ' level'] = test;
   });
 
   var metadatatest = {
     topic: function() {
       transport.log(
-        { level: "info", message: "test message meta boolean", Metadata: true },
+        { level: 'info', message: 'test message meta boolean', Metadata: true },
         this.callback
       );
     }
   };
 
   metadatatest[assertMsg] = assertFn;
-  tests["when passed metadata"] = metadatatest;
+  tests['when passed metadata'] = metadatatest;
 
   var primmetadatatest = {
     topic: function() {
-      transport.log("metadata", this.callback);
+      transport.log('metadata', this.callback);
     }
   };
 
   primmetadatatest[assertMsg] = assertFn;
-  tests["when passed primitive metadata"] = primmetadatatest;
+  tests['when passed primitive metadata'] = primmetadatatest;
 
   var nummetadatatest = {
     topic: function() {
@@ -42,7 +42,7 @@ module.exports.testLevels = function(transport, assertMsg, assertFn) {
   };
 
   nummetadatatest[assertMsg] = assertFn;
-  tests["when passed numeric metadata"] = nummetadatatest;
+  tests['when passed numeric metadata'] = nummetadatatest;
 
   return tests;
 };
