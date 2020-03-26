@@ -110,11 +110,7 @@ All of the winston tests are written in [vows][5], and cover all of the use case
     "transports": {
       "loggly": {
         "subdomain": "your-subdomain",
-        "token": "really-long-token-you-got-from-loggly",
-        "auth": {
-          "username": "your-username",
-          "password": "your-password"
-        }
+        "token": "really-long-token-you-got-from-loggly"
       }
     }
   }
