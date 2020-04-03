@@ -103,20 +103,7 @@ Note: If you are using npm version 2, please run the below command:
 
 ## Run Tests
 
-All of the winston tests are written in [vows][5], and cover all of the use cases described above. You will need to add valid credentials for the various transports included to `test/config.json` before running tests:
-
-``` js
-  {
-    "transports": {
-      "loggly": {
-        "subdomain": "your-subdomain",
-        "token": "really-long-token-you-got-from-loggly"
-      }
-    }
-  }
-```
-
-Once you have valid configuration and credentials you can run tests with [npm][6]:
+Written in Jest. Testing that log events are correctly passed on.
 
 ``` bash
   npm test
