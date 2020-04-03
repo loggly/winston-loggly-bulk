@@ -200,4 +200,24 @@ describe('winston integration', () => {
       expect.any(Function)
     );
   });
+
+  test('handles "details" prop duplicity', () => {
+    const level = 'warn';
+    const message = 'Hello world';
+    const meta = [{ details: true, secret: 'foo' }, { bar: 'baz' }];
+    winston.log(level, message, ...meta);
+    expect(spy).toHaveBeenCalledWith(
+      {
+        details: [{ details: true }, meta[1]],
+        secret: "foo",
+        level,
+        message,
+        [Symbol.for('level')]: level,
+        [Symbol.for('message')]: JSON.stringify({ ...meta[0], level, message }),
+        [Symbol.for('splat')]: meta
+      },
+      expect.any(Function)
+    );
+  });
+
 });
