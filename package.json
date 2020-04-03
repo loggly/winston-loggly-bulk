@@ -34,11 +34,11 @@
     "winston-transport": "^4.3.0"
   },
   "devDependencies": {
-    "vows": "0.8.3"
+    "jest": "^25.2.6"
   },
   "main": "./lib/winston-loggly",
   "scripts": {
-    "test": "vows --spec"
+    "test": "jest"
   },
   "engines": {
     "node": ">= 6.4.0"

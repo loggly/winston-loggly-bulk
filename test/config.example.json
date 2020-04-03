@@ -1,8 +1,0 @@
-{
-  "transports": {
-    "loggly": {
-      "subdomain": "your-subdomain",
-      "token": "really-long-token-you-got-from-loggly"
-    }
-  }
-}
