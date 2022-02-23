@@ -6,7 +6,7 @@ A [Loggly][0] transport for [winston][1].
 
 [![NPM](https://nodei.co/npm/winston-loggly-bulk.png?downloads=true&downloadRank=true)](https://nodei.co/npm/winston-loggly-bulk/)
 
-A client implementation for Loggly in node.js. Check out Loggly's [Node logging documentation](https://www.loggly.com/docs/nodejs-logs/) for more.
+A client implementation for Loggly in node.js. Check out Loggly's [Node logging documentation](https://documentation.solarwinds.com/en/success_center/loggly/content/admin/node-js-logs-2.htm) for more.
 
 ## Usage
 
