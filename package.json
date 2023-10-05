@@ -28,13 +28,13 @@
     "winston"
   ],
   "dependencies": {
-    "lodash.clonedeep": "^4.5.0",
-    "node-loggly-bulk": "^3.0.0",
-    "winston": "^3.3.3",
-    "winston-transport": "^4.4.0"
+    "lodash.clonedeep": "4.5.0",
+    "node-loggly-bulk": "4.0.1",
+    "winston": "3.10.0",
+    "winston-transport": "4.5.0"
   },
   "devDependencies": {
-    "jest": "^25.5.4"
+    "jest": "29.7.0"
   },
   "main": "./lib/winston-loggly",
   "scripts": {

@@ -122,7 +122,7 @@ describe('winston integration', () => {
         level,
         ...message,
         [Symbol.for('level')]: level,
-        [Symbol.for('message')]: JSON.stringify({ ...message, level })
+        [Symbol.for('message')]: JSON.stringify({ level, message: 'Hello world' })
       },
       expect.any(Function)
     );
@@ -194,8 +194,8 @@ describe('winston integration', () => {
         message,
         ...meta[0],
         [Symbol.for('level')]: level,
-        [Symbol.for('message')]: JSON.stringify({ ...meta[0], level, message }),
-        [Symbol.for('splat')]: meta
+        [Symbol.for('splat')]: meta,
+        [Symbol.for('message')]: JSON.stringify({ custom: true, level, message, secret: 'foo'})
       },
       expect.any(Function)
     );
@@ -213,8 +213,8 @@ describe('winston integration', () => {
         level,
         message,
         [Symbol.for('level')]: level,
-        [Symbol.for('message')]: JSON.stringify({ ...meta[0], level, message }),
-        [Symbol.for('splat')]: meta
+        [Symbol.for('splat')]: meta,
+        [Symbol.for('message')]: JSON.stringify({  details: true, level, message, secret: 'foo', }),
       },
       expect.any(Function)
     );
