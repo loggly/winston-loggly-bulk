@@ -29,7 +29,7 @@
   ],
   "dependencies": {
     "lodash.clonedeep": "4.5.0",
-    "node-loggly-bulk": "4.0.1",
+    "node-loggly-bulk": "4.0.2",
     "winston": "3.10.0",
     "winston-transport": "4.5.0"
   },
